@@ -1219,9 +1219,9 @@
         // ============================================================
         // 3. EMAILJS KONFIGURASI (GANTI DENGAN PUBLIC KEY ANDA)
         // ============================================================
-        const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
-        const EMAILJS_SERVICE_ID = "YOUR_EMAILJS_SERVICE_ID";
-        const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
+        const EMAILJS_PUBLIC_KEY = "xWJxFNwa1uM4OhvKs";
+        const EMAILJS_SERVICE_ID = "service_b2xwjwb";
+        const EMAILJS_TEMPLATE_ID = "template_qj2739o";
 
         emailjs.init(EMAILJS_PUBLIC_KEY);
 
@@ -1371,7 +1371,6 @@
             // Jika pengguna menaip "kvwt", tukar ke email admin sebenar
             if (email.toLowerCase() === 'kvwt') {
                 email = 'perpustakaankvwt2.0@gmail.com';
-                // (pilihan: kita boleh set semula field untuk menunjukkan email sebenar, tetapi tidak perlu)
             }
 
             try {
@@ -1382,36 +1381,19 @@
         });
 
         // Admin button – langsung log masuk tanpa mengisi borang
+        // Sekarang ia akan mencipta akaun jika belum wujud
         document.getElementById('adminLoginBtn').addEventListener('click', async () => {
             const errEl = document.getElementById('loginError');
-            try {
-                await auth.signInWithEmailAndPassword('perpustakaankvwt2.0@gmail.com', 'kvwt intel');
-                // Jika berjaya, auth state listener akan bawa ke dashboard admin
-            } catch (err) {
-                showError(errEl, 'Gagal log masuk sebagai admin: ' + err.message);
-            }
-        });
-
-        // Enter key support
-        document.getElementById('loginPassword').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') document.getElementById('loginBtn').click();
-        });
-        document.getElementById('regPassword').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') document.getElementById('registerBtn').click();
-        });
-
-        // ============================================================
-        // 9. AUTH STATE LISTENER + AUTO-CREATE ADMIN
-        // ============================================================
-        async function ensureAdminAccount() {
             const adminEmail = 'perpustakaankvwt2.0@gmail.com';
             const adminPassword = 'kvwt intel';
+
             try {
+                // Cuba log masuk dahulu
                 await auth.signInWithEmailAndPassword(adminEmail, adminPassword);
-                await auth.signOut();
-                console.log('Admin account already exists.');
+                // Jika berjaya, auth state listener akan bawa ke dashboard admin
             } catch (error) {
                 if (error.code === 'auth/user-not-found') {
+                    // Akaun belum wujud – cipta sekarang
                     try {
                         const cred = await auth.createUserWithEmailAndPassword(adminEmail, adminPassword);
                         const uid = cred.user.uid;
@@ -1425,16 +1407,37 @@
                             totalBacaan: 0,
                             createdAt: Date.now()
                         });
-                        console.log('Admin account created successfully.');
-                        await auth.signOut();
+                        showToast('✅ Akaun admin telah dicipta. Log masuk automatik...', 'success');
+                        // Log masuk semula selepas cipta
+                        await auth.signInWithEmailAndPassword(adminEmail, adminPassword);
                     } catch (createError) {
-                        console.error('Failed to create admin account:', createError);
+                        showError(errEl, 'Gagal mencipta akaun admin: ' + createError.message);
                     }
+                } else if (error.code === 'auth/wrong-password') {
+                    showError(errEl, 'Kata laluan admin salah. Sila semak.');
+                } else if (error.code === 'auth/invalid-email') {
+                    showError(errEl, 'Email admin tidak sah. Sila semak konfigurasi.');
                 } else {
-                    console.error('Error checking admin account:', error);
+                    showError(errEl, 'Gagal log masuk sebagai admin: ' + error.message);
                 }
             }
-        }
+        });
+
+        // Enter key support
+        document.getElementById('loginPassword').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('loginBtn').click();
+        });
+        document.getElementById('regPassword').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('registerBtn').click();
+        });
+
+        // ============================================================
+        // 9. AUTH STATE LISTENER (tanpa auto-create admin berlebihan)
+        // ============================================================
+        // Kita sudah ada logik cipta admin dalam butang admin, jadi kita tidak perlu
+        // lagi fungsi ensureAdminAccount() yang berasingan. Tetapi kita boleh
+        // biarkan ia sebagai fallback jika mahu. Untuk elakkan konflik, kita
+        // kosongkan sahaja atau kita biarkan tetapi kurang penting.
 
         auth.onAuthStateChanged(async (user) => {
             if (user) {
@@ -1463,7 +1466,8 @@
                 document.getElementById('registerForm').style.display = 'none';
                 document.getElementById('loginError').style.display = 'none';
                 document.getElementById('registerError').style.display = 'none';
-                await ensureAdminAccount();
+                // Tiada lagi ensureAdminAccount() di sini untuk mengelakkan pertindihan.
+                // Butang admin akan uruskan penciptaan.
             }
         });
 
@@ -2072,7 +2076,7 @@
         });
 
         console.log('📚 NILAM Digital sedia!');
-        console.log('637eSsXzH98eA1-ez');
+        console.log('⚠️  Gantikan EmailJS config sebelum deploy.');
         console.log('🔑 Admin login: kvwt / kvwt intel');
     </script>
 </body>
