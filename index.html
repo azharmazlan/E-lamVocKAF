@@ -16,8 +16,8 @@
     </script>
     <style>
         /* =============================================
-                   RESET & BASE
-                   ============================================= */
+           RESET & BASE
+           ============================================= */
         * {
             margin: 0;
             padding: 0;
@@ -33,9 +33,6 @@
             justify-content: center;
         }
 
-        /* =============================================
-                   CONTAINER UTAMA
-                   ============================================= */
         #app {
             width: 100%;
             max-width: 1400px;
@@ -45,9 +42,6 @@
             position: relative;
         }
 
-        /* =============================================
-                   PAGE / VIEW
-                   ============================================= */
         .page {
             display: none;
             padding: 20px;
@@ -69,9 +63,7 @@
             }
         }
 
-        /* =============================================
-                   LOGIN / REGISTER
-                   ============================================= */
+        /* Auth Container */
         .auth-container {
             max-width: 480px;
             margin: 60px auto;
@@ -209,9 +201,7 @@
             display: block;
         }
 
-        /* =============================================
-                   DASHBOARD LAYOUT
-                   ============================================= */
+        /* DASHBOARD LAYOUT */
         .dash-layout {
             display: flex;
             min-height: 100vh;
@@ -346,9 +336,7 @@
             font-size: 14px;
         }
 
-        /* =============================================
-                   STATS CARDS
-                   ============================================= */
+        /* STATS CARDS */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -382,15 +370,7 @@
             margin-top: 4px;
         }
 
-        .stat-card .icon-bg {
-            float: right;
-            font-size: 32px;
-            opacity: 0.2;
-        }
-
-        /* =============================================
-                   TABLES
-                   ============================================= */
+        /* TABLES */
         .table-wrap {
             background: #fff;
             border-radius: 16px;
@@ -478,16 +458,6 @@
             color: #1a73e8;
         }
 
-        .table-wrap table .badge.admin {
-            background: #fde8e8;
-            color: #b91c1c;
-        }
-
-        .table-wrap table .badge.student {
-            background: #e6f7e6;
-            color: #0b6e0b;
-        }
-
         .table-wrap table .btn-sm {
             padding: 5px 12px;
             border: none;
@@ -508,15 +478,6 @@
             background: #fcd5d5;
         }
 
-        .table-wrap table .btn-sm.primary {
-            background: #e8f0fe;
-            color: #1a73e8;
-        }
-
-        .table-wrap table .btn-sm.primary:hover {
-            background: #d2e3fc;
-        }
-
         .table-wrap .empty-row td {
             text-align: center;
             padding: 40px 20px;
@@ -524,9 +485,7 @@
             font-style: italic;
         }
 
-        /* =============================================
-                   FORMS (dalam dashboard)
-                   ============================================= */
+        /* FORMS */
         .form-card {
             background: #fff;
             border-radius: 16px;
@@ -591,24 +550,13 @@
             background: #1557b0;
         }
 
-        .form-card .btn-secondary {
-            background: #e8f0fe;
-            color: #1a73e8;
-        }
-
-        .form-card .btn-secondary:hover {
-            background: #d2e3fc;
-        }
-
         .form-card .row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
         }
 
-        /* =============================================
-                   RANKING / TOP 10
-                   ============================================= */
+        /* RANKING */
         .rank-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -661,9 +609,7 @@
             color: #1a73e8;
         }
 
-        /* =============================================
-                   TOAST / NOTIFICATION
-                   ============================================= */
+        /* TOAST */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -710,9 +656,87 @@
             }
         }
 
-        /* =============================================
-                   RESPONSIVE
-                   ============================================= */
+        /* PROFILE CARD */
+        .profile-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 1px solid #eef2f7;
+            padding: 24px 28px;
+            max-width: 500px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+            margin-bottom: 24px;
+        }
+
+        .profile-card .profile-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f4f8;
+            font-size: 14px;
+        }
+
+        .profile-card .profile-row:last-child {
+            border-bottom: none;
+        }
+
+        .profile-card .profile-row .label {
+            color: #5f6b7a;
+            font-weight: 500;
+        }
+
+        .profile-card .profile-row .value {
+            font-weight: 600;
+            color: #0a2540;
+        }
+
+        .profile-card .profile-row .value.highlight {
+            color: #1a73e8;
+            font-size: 18px;
+        }
+
+        .admin-hint {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #5f6b7a;
+        }
+        .admin-hint strong {
+            color: #1a73e8;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 400;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #1a73e8;
+        }
+
+        .attachment-preview {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e8f0fe;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #1a73e8;
+            margin-top: 4px;
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 900px) {
             .dash-layout {
                 flex-direction: column;
@@ -828,202 +852,17 @@
                 font-size: 20px;
             }
         }
-
-        /* =============================================
-                   SCROLLBAR
-                   ============================================= */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f0f4f8;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #c1cddb;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a0b0c0;
-        }
-
-        /* =============================================
-                   MISC
-                   ============================================= */
-        .flex-between {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .mt-12 {
-            margin-top: 12px;
-        }
-        .mb-12 {
-            margin-bottom: 12px;
-        }
-        .gap-8 {
-            gap: 8px;
-        }
-        .gap-12 {
-            gap: 12px;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-        .text-muted {
-            color: #5f6b7a;
-            font-size: 13px;
-        }
-
-        .file-input-wrapper {
-            position: relative;
-        }
-
-        .file-input-wrapper input[type="file"] {
-            padding: 8px;
-            background: #fafcff;
-            border: 1.5px dashed #dce3ed;
-            border-radius: 10px;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        .file-input-wrapper input[type="file"]:hover {
-            border-color: #1a73e8;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 400;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: #1a73e8;
-        }
-
-        /* Hidden file input for email attachment */
-        #emailAttachmentInput {
-            display: none;
-        }
-
-        .attachment-preview {
-            display: inline-block;
-            padding: 4px 12px;
-            background: #e8f0fe;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #1a73e8;
-            margin-top: 4px;
-        }
-
-        /* Loading spinner */
-        .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* =============================================
-                   STUDENT PROFILE CARD
-                   ============================================= */
-        .profile-card {
-            background: #fff;
-            border-radius: 16px;
-            border: 1px solid #eef2f7;
-            padding: 24px 28px;
-            max-width: 500px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
-            margin-bottom: 24px;
-        }
-
-        .profile-card .profile-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f4f8;
-            font-size: 14px;
-        }
-
-        .profile-card .profile-row:last-child {
-            border-bottom: none;
-        }
-
-        .profile-card .profile-row .label {
-            color: #5f6b7a;
-            font-weight: 500;
-        }
-
-        .profile-card .profile-row .value {
-            font-weight: 600;
-            color: #0a2540;
-        }
-
-        .profile-card .profile-row .value.highlight {
-            color: #1a73e8;
-            font-size: 18px;
-        }
-
-        /* Admin login hint */
-        .admin-hint {
-            text-align: center;
-            margin-top: 12px;
-            font-size: 13px;
-            color: #5f6b7a;
-        }
-        .admin-hint strong {
-            color: #1a73e8;
-        }
     </style>
 </head>
 <body>
 
-    <!-- ======================================================
-    TOAST CONTAINER
-    ====================================================== -->
+    <!-- TOAST CONTAINER -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- ======================================================
-    APP
-    ====================================================== -->
+    <!-- APP -->
     <div id="app">
 
-        <!-- =============================================
-        PAGE: LOGIN / REGISTER (authPage)
-        ============================================= -->
+        <!-- ===== AUTH PAGE ===== -->
         <div class="page active" id="authPage">
             <div class="auth-container" id="authContainer">
                 <!-- Login Form -->
@@ -1041,7 +880,6 @@
                         <input type="password" id="loginPassword" placeholder="••••••••" />
                     </div>
                     <button class="btn" id="loginBtn">Log Masuk</button>
-                    <!-- Butang Admin -->
                     <button class="btn btn-outline" id="adminLoginBtn" style="margin-top:10px;">🔑 Log Masuk sebagai Admin</button>
                     <div class="admin-hint">
                         <strong>Admin:</strong> gunakan "kvwt" & "kvwt intel"
@@ -1085,12 +923,9 @@
             </div>
         </div>
 
-        <!-- =============================================
-        PAGE: STUDENT DASHBOARD (studentPage)
-        ============================================= -->
+        <!-- ===== STUDENT PAGE ===== -->
         <div class="page" id="studentPage">
             <div class="dash-layout">
-                <!-- Sidebar -->
                 <aside class="sidebar" id="studentSidebar">
                     <div class="brand">📚 NILAM <span>Digital</span></div>
                     <button class="nav-item active" data-view="studentProfile">
@@ -1112,10 +947,8 @@
                     </div>
                     <button class="logout-btn" id="studentLogoutBtn">🚪 Log Keluar</button>
                 </aside>
-
-                <!-- Main -->
                 <main class="main-content" id="studentMain">
-                    <!-- PROFILE VIEW -->
+                    <!-- Profile -->
                     <div class="view active" id="studentProfile">
                         <h2 class="page-title">👤 Profil Saya</h2>
                         <p class="page-sub">Maklumat akaun dan statistik bacaan</p>
@@ -1129,8 +962,7 @@
                         </div>
                         <div style="font-size:13px;color:#5f6b7a;">📌 Mata dikira secara automatik = bilangan muka surat</div>
                     </div>
-
-                    <!-- ADD READING VIEW -->
+                    <!-- Add Reading -->
                     <div class="view" id="studentAddReading">
                         <h2 class="page-title">📖 Tambah Rekod Bacaan</h2>
                         <p class="page-sub">Masukkan maklumat bahan bacaan anda</p>
@@ -1178,8 +1010,7 @@
                             <button class="btn" id="addReadingBtn">➕ Simpan Rekod</button>
                         </div>
                     </div>
-
-                    <!-- MY RECORDS VIEW -->
+                    <!-- My Records -->
                     <div class="view" id="studentMyRecords">
                         <h2 class="page-title">📋 Rekod Bacaan Saya</h2>
                         <p class="page-sub">Semua rekod bacaan yang telah disimpan</p>
@@ -1191,25 +1022,12 @@
                                 </div>
                             </div>
                             <table>
-                                <thead>
-                                    <tr>
-                                        <th>Tajuk</th>
-                                        <th>Jenis</th>
-                                        <th>Bahasa</th>
-                                        <th>M/S</th>
-                                        <th>Mata</th>
-                                        <th>Tarikh</th>
-                                        <th>Tindakan</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="studentRecordsBody">
-                                    <tr class="empty-row"><td colspan="7">Tiada rekod bacaan.</td></tr>
-                                </tbody>
+                                <thead><tr><th>Tajuk</th><th>Jenis</th><th>Bahasa</th><th>M/S</th><th>Mata</th><th>Tarikh</th><th>Tindakan</th></tr></thead>
+                                <tbody id="studentRecordsBody"><tr class="empty-row"><td colspan="7">Tiada rekod bacaan.</td></tr></tbody>
                             </table>
                         </div>
                     </div>
-
-                    <!-- EDIT PROFILE VIEW -->
+                    <!-- Edit Profile -->
                     <div class="view" id="studentEditProfile">
                         <h2 class="page-title">✏️ Kemaskini Profil</h2>
                         <p class="page-sub">Ubah maklumat akaun (role tidak boleh diubah)</p>
@@ -1239,12 +1057,9 @@
             </div>
         </div>
 
-        <!-- =============================================
-        PAGE: ADMIN DASHBOARD (adminPage)
-        ============================================= -->
+        <!-- ===== ADMIN PAGE ===== -->
         <div class="page" id="adminPage">
             <div class="dash-layout">
-                <!-- Sidebar -->
                 <aside class="sidebar" id="adminSidebar">
                     <div class="brand">📚 NILAM <span>Digital</span></div>
                     <button class="nav-item active" data-view="adminOverview">
@@ -1269,10 +1084,8 @@
                     </div>
                     <button class="logout-btn" id="adminLogoutBtn">🚪 Log Keluar</button>
                 </aside>
-
-                <!-- Main -->
                 <main class="main-content" id="adminMain">
-                    <!-- OVERVIEW -->
+                    <!-- Overview -->
                     <div class="view active" id="adminOverview">
                         <h2 class="page-title">📊 Dashboard Admin</h2>
                         <p class="page-sub">Statistik keseluruhan sistem NILAM Digital</p>
@@ -1282,22 +1095,12 @@
                             <div class="stat-card"><div class="number" id="statMata">0</div><div class="label">⭐ Jumlah Mata Keseluruhan</div></div>
                         </div>
                         <div class="rank-grid">
-                            <div class="rank-card">
-                                <h4>🏆 Top 10 Pelajar (Mata)</h4>
-                                <div id="rankMata"><div class="text-muted">Memuatkan...</div></div>
-                            </div>
-                            <div class="rank-card">
-                                <h4>📚 Top 10 Pelajar (Bacaan)</h4>
-                                <div id="rankBacaan"><div class="text-muted">Memuatkan...</div></div>
-                            </div>
-                            <div class="rank-card">
-                                <h4>🏫 Top 10 Kelas (Bacaan)</h4>
-                                <div id="rankKelas"><div class="text-muted">Memuatkan...</div></div>
-                            </div>
+                            <div class="rank-card"><h4>🏆 Top 10 Pelajar (Mata)</h4><div id="rankMata"><div class="text-muted">Memuatkan...</div></div></div>
+                            <div class="rank-card"><h4>📚 Top 10 Pelajar (Bacaan)</h4><div id="rankBacaan"><div class="text-muted">Memuatkan...</div></div></div>
+                            <div class="rank-card"><h4>🏫 Top 10 Kelas (Bacaan)</h4><div id="rankKelas"><div class="text-muted">Memuatkan...</div></div></div>
                         </div>
                     </div>
-
-                    <!-- STUDENTS -->
+                    <!-- Students -->
                     <div class="view" id="adminStudents">
                         <h2 class="page-title">👥 Senarai Pelajar</h2>
                         <p class="page-sub">Urus akaun pelajar</p>
@@ -1310,14 +1113,11 @@
                             </div>
                             <table>
                                 <thead><tr><th>Nama</th><th>IC</th><th>Kelas</th><th>Email</th><th>Bacaan</th><th>Mata</th><th>Tindakan</th></tr></thead>
-                                <tbody id="adminStudentsBody">
-                                    <tr class="empty-row"><td colspan="7">Tiada pelajar.</td></tr>
-                                </tbody>
+                                <tbody id="adminStudentsBody"><tr class="empty-row"><td colspan="7">Tiada pelajar.</td></tr></tbody>
                             </table>
                         </div>
                     </div>
-
-                    <!-- ALL RECORDS -->
+                    <!-- All Records -->
                     <div class="view" id="adminRecords">
                         <h2 class="page-title">📋 Semua Rekod Bacaan</h2>
                         <p class="page-sub">Urus rekod bacaan semua pelajar</p>
@@ -1330,14 +1130,11 @@
                             </div>
                             <table>
                                 <thead><tr><th>Pelajar</th><th>Tajuk</th><th>Jenis</th><th>Bahasa</th><th>M/S</th><th>Mata</th><th>Tarikh</th><th>Tindakan</th></tr></thead>
-                                <tbody id="adminRecordsBody">
-                                    <tr class="empty-row"><td colspan="8">Tiada rekod.</td></tr>
-                                </tbody>
+                                <tbody id="adminRecordsBody"><tr class="empty-row"><td colspan="8">Tiada rekod.</td></tr></tbody>
                             </table>
                         </div>
                     </div>
-
-                    <!-- EMAIL -->
+                    <!-- Email -->
                     <div class="view" id="adminEmail">
                         <h2 class="page-title">✉️ Hantar Email</h2>
                         <p class="page-sub">Hantar surat amaran, pengumuman, sijil, dsb.</p>
@@ -1377,17 +1174,14 @@
                             <button class="btn" id="emailSendBtn">📤 Hantar Email</button>
                         </div>
                     </div>
-
-                    <!-- EMAIL LOGS -->
+                    <!-- Email Logs -->
                     <div class="view" id="adminEmailLogs">
                         <h2 class="page-title">📜 Log Penghantaran Email</h2>
                         <p class="page-sub">Sejarah email yang telah dihantar</p>
                         <div class="table-wrap">
                             <table>
                                 <thead><tr><th>Penerima</th><th>Email</th><th>Subjek</th><th>Tarikh</th></tr></thead>
-                                <tbody id="emailLogsBody">
-                                    <tr class="empty-row"><td colspan="4">Tiada log email.</td></tr>
-                                </tbody>
+                                <tbody id="emailLogsBody"><tr class="empty-row"><td colspan="4">Tiada log email.</td></tr></tbody>
                             </table>
                         </div>
                     </div>
@@ -1402,7 +1196,7 @@
     ====================================================== -->
     <script>
         // ============================================================
-        // 1. KONFIGURASI FIREBASE (GUNAKAN CONFIG YANG DIBERIKAN)
+        // 1. KONFIGURASI FIREBASE
         // ============================================================
         const firebaseConfig = {
             apiKey: "AIzaSyB9ksLH5DOSpLTNg8SZsMztp2vn39SfnsU",
@@ -1434,11 +1228,10 @@
         // ============================================================
         // 4. STATE GLOBAL
         // ============================================================
-        let currentUser = null; // { uid, nama, ic, kelas, email, role, totalMata, totalBacaan }
-        let allStudents = {}; // uid -> data
-        let allRecords = {}; // recordId -> data
-        let allEmailLogs = {}; // logId -> data
-        let studentRecords = {}; // recordId -> data (untuk pelajar semasa)
+        let currentUser = null;
+        let adminStudentsCache = [];
+        let adminRecordsCache = [];
+        let studentRecordsCache = [];
 
         // ============================================================
         // 5. TOAST
@@ -1464,12 +1257,6 @@
             if (!ts) return '-';
             const d = new Date(ts);
             return d.toLocaleDateString('ms-MY', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        }
-
-        function formatDateInput(dateStr) {
-            if (!dateStr) return '';
-            const d = new Date(dateStr);
-            return d.toISOString().split('T')[0];
         }
 
         function generateId() {
@@ -1510,7 +1297,6 @@
         // ============================================================
         // 8. AUTH: LOGIN / REGISTER
         // ============================================================
-        // Switch between login & register
         document.getElementById('goToRegister').addEventListener('click', () => {
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('registerForm').style.display = 'block';
@@ -1524,7 +1310,6 @@
             document.getElementById('registerError').style.display = 'none';
         });
 
-        // Register
         document.getElementById('registerBtn').addEventListener('click', async () => {
             const nama = document.getElementById('regNama').value.trim();
             const ic = document.getElementById('regIc').value.trim();
@@ -1546,7 +1331,6 @@
             try {
                 const cred = await auth.createUserWithEmailAndPassword(email, password);
                 const uid = cred.user.uid;
-                // Simpan data pengguna di Realtime DB
                 await db.ref('users/' + uid).set({
                     nama: nama,
                     ic: ic,
@@ -1558,25 +1342,21 @@
                     createdAt: Date.now()
                 });
                 showSuccess(sucEl, '✅ Pendaftaran berjaya! Sila log masuk.');
-                // Reset form
                 document.getElementById('regNama').value = '';
                 document.getElementById('regIc').value = '';
                 document.getElementById('regKelas').value = '';
                 document.getElementById('regEmail').value = '';
                 document.getElementById('regPassword').value = '';
-                // Switch to login
                 document.getElementById('loginForm').style.display = 'block';
                 document.getElementById('registerForm').style.display = 'none';
                 document.getElementById('loginEmail').value = email;
                 document.getElementById('loginPassword').value = '';
-                // Sign out immediately
                 await auth.signOut();
             } catch (err) {
                 showError(errEl, err.message);
             }
         });
 
-        // Login
         document.getElementById('loginBtn').addEventListener('click', async () => {
             const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value;
@@ -1588,22 +1368,18 @@
             }
 
             try {
-                const cred = await auth.signInWithEmailAndPassword(email, password);
-                // Akan dihandle oleh auth state listener
+                await auth.signInWithEmailAndPassword(email, password);
             } catch (err) {
                 showError(errEl, err.message);
             }
         });
 
-        // Admin login button - isi dengan "kvwt" dan "kvwt intel"
         document.getElementById('adminLoginBtn').addEventListener('click', () => {
             document.getElementById('loginEmail').value = 'kvwt';
             document.getElementById('loginPassword').value = 'kvwt intel';
-            // trigger login
             document.getElementById('loginBtn').click();
         });
 
-        // Enter key support
         document.getElementById('loginPassword').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') document.getElementById('loginBtn').click();
         });
@@ -1614,18 +1390,14 @@
         // ============================================================
         // 9. AUTH STATE LISTENER + AUTO-CREATE ADMIN
         // ============================================================
-        // Fungsi untuk mencipta akaun admin jika belum wujud
         async function ensureAdminAccount() {
             const adminEmail = 'perpustakaankvwt2.0@gmail.com';
             const adminPassword = 'kvwt intel';
             try {
-                // Cuba login dengan kredensial admin untuk semak sama ada akaun wujud
                 await auth.signInWithEmailAndPassword(adminEmail, adminPassword);
-                // Jika berjaya, sign out semula (kita akan biarkan auth state listener handle)
                 await auth.signOut();
                 console.log('Admin account already exists.');
             } catch (error) {
-                // Jika akaun tidak wujud, cipta
                 if (error.code === 'auth/user-not-found') {
                     try {
                         const cred = await auth.createUserWithEmailAndPassword(adminEmail, adminPassword);
@@ -1653,17 +1425,14 @@
 
         auth.onAuthStateChanged(async (user) => {
             if (user) {
-                // Ambil data dari Realtime DB
                 try {
                     const snap = await db.ref('users/' + user.uid).once('value');
                     const data = snap.val();
                     if (!data) {
-                        // Jika tiada data, sign out
                         await auth.signOut();
                         return;
                     }
                     currentUser = { uid: user.uid, ...data };
-                    // Navigasi berdasarkan role
                     if (data.role === 'admin') {
                         showPage('adminPage');
                         initAdminDashboard();
@@ -1677,12 +1446,10 @@
             } else {
                 currentUser = null;
                 showPage('authPage');
-                // Reset forms
                 document.getElementById('loginForm').style.display = 'block';
                 document.getElementById('registerForm').style.display = 'none';
                 document.getElementById('loginError').style.display = 'none';
                 document.getElementById('registerError').style.display = 'none';
-                // Pastikan admin wujud (hanya apabila tiada user login)
                 await ensureAdminAccount();
             }
         });
@@ -1696,43 +1463,28 @@
         // ============================================================
         // 11. STUDENT DASHBOARD
         // ============================================================
-        let studentRecordsCache = [];
-
         function initStudentDashboard() {
             if (!currentUser) return;
-            // Isi sidebar name
             document.getElementById('studentSidebarName').textContent = currentUser.nama || 'Pelajar';
-
-            // Muat profil
             updateStudentProfile();
-
-            // Muat rekod pelajar
             loadStudentRecords();
 
-            // Event untuk sidebar nav
             document.querySelectorAll('#studentSidebar .nav-item').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    document.querySelectorAll('#studentSidebar .nav-item').forEach(b => b.classList.remove(
-                    'active'));
+                    document.querySelectorAll('#studentSidebar .nav-item').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     const view = btn.dataset.view;
                     document.querySelectorAll('#studentMain .view').forEach(v => v.classList.remove('active'));
                     const target = document.getElementById(view);
                     if (target) target.classList.add('active');
-                    // Refresh data jika perlu
                     if (view === 'studentProfile') updateStudentProfile();
                     if (view === 'studentMyRecords') loadStudentRecords();
                     if (view === 'studentEditProfile') fillEditProfile();
                 });
             });
 
-            // Event add reading
             document.getElementById('addReadingBtn').addEventListener('click', addReadingRecord);
-
-            // Event search records
             document.getElementById('studentRecordSearch').addEventListener('input', () => renderStudentRecords());
-
-            // Event edit profile
             document.getElementById('editProfileBtn').addEventListener('click', updateStudentProfileSave);
         }
 
@@ -1776,26 +1528,24 @@
                 return;
             }
             tbody.innerHTML = filtered.map(r => `
-                    <tr>
-                        <td><strong>${escapeHtml(r.tajuk || '-')}</strong></td>
-                        <td><span class="badge">${escapeHtml(r.kategori || '-')}</span></td>
-                        <td>${escapeHtml(r.bahasa || '-')}</td>
-                        <td>${r.mukaSurat || 0}</td>
-                        <td><strong>${r.mata || 0}</strong></td>
-                        <td>${formatDate(r.tarikh)}</td>
-                        <td>
-                            <button class="btn-sm danger" onclick="deleteStudentRecord('${r.id}')">🗑️</button>
-                        </td>
-                    </tr>
-                `).join('');
+                <tr>
+                    <td><strong>${escapeHtml(r.tajuk || '-')}</strong></td>
+                    <td><span class="badge">${escapeHtml(r.kategori || '-')}</span></td>
+                    <td>${escapeHtml(r.bahasa || '-')}</td>
+                    <td>${r.mukaSurat || 0}</td>
+                    <td><strong>${r.mata || 0}</strong></td>
+                    <td>${formatDate(r.tarikh)}</td>
+                    <td>
+                        <button class="btn-sm danger" onclick="deleteStudentRecord('${r.id}')">🗑️</button>
+                    </td>
+                </tr>
+            `).join('');
         }
 
-        // Delete student record (with confirmation)
         window.deleteStudentRecord = async function(recordId) {
             if (!confirm('Padam rekod ini?')) return;
             try {
                 await db.ref('bacaan/' + recordId).remove();
-                // Kurangkan total bacaan dan mata pelajar
                 const record = studentRecordsCache.find(r => r.id === recordId);
                 if (record && currentUser) {
                     const newBacaan = Math.max(0, (currentUser.totalBacaan || 0) - 1);
@@ -1830,7 +1580,7 @@
                 return;
             }
 
-            const mata = mukaSurat; // Mata = bilangan muka surat
+            const mata = mukaSurat;
             const recordId = generateId();
 
             try {
@@ -1848,7 +1598,6 @@
                     createdAt: Date.now()
                 });
 
-                // Update total bacaan & mata
                 const newBacaan = (currentUser.totalBacaan || 0) + 1;
                 const newMata = (currentUser.totalMata || 0) + mata;
                 await db.ref('users/' + currentUser.uid).update({
@@ -1859,12 +1608,10 @@
                 currentUser.totalMata = newMata;
 
                 showSuccess(sucEl, '✅ Rekod bacaan berjaya disimpan! +' + mata + ' mata');
-                // Reset form
                 document.getElementById('readTajuk').value = '';
                 document.getElementById('readMukaSurat').value = '';
                 document.getElementById('readRingkasan').value = '';
                 document.getElementById('readTarikh').value = '';
-                // Refresh
                 updateStudentProfile();
                 loadStudentRecords();
             } catch (err) {
@@ -1872,7 +1619,6 @@
             }
         }
 
-        // Fill edit profile form
         function fillEditProfile() {
             if (!currentUser) return;
             document.getElementById('editNama').value = currentUser.nama || '';
@@ -1895,23 +1641,19 @@
             }
 
             try {
-                // Update di Realtime DB
                 await db.ref('users/' + currentUser.uid).update({
                     nama: nama,
                     ic: ic,
                     kelas: kelas,
                     email: email
                 });
-                // Update di Auth (email)
                 if (email !== currentUser.email) {
                     await auth.currentUser.updateEmail(email);
                 }
-                // Update currentUser
                 currentUser.nama = nama;
                 currentUser.ic = ic;
                 currentUser.kelas = kelas;
                 currentUser.email = email;
-                // Update sidebar name
                 document.getElementById('studentSidebarName').textContent = nama;
                 showSuccess(sucEl, '✅ Profil berjaya dikemaskini!');
                 updateStudentProfile();
@@ -1923,24 +1665,18 @@
         // ============================================================
         // 12. ADMIN DASHBOARD
         // ============================================================
-        let adminStudentsCache = [];
-        let adminRecordsCache = [];
-
         function initAdminDashboard() {
             if (!currentUser) return;
             document.getElementById('adminSidebarName').textContent = 'Admin';
 
-            // Event sidebar
             document.querySelectorAll('#adminSidebar .nav-item').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    document.querySelectorAll('#adminSidebar .nav-item').forEach(b => b.classList.remove(
-                    'active'));
+                    document.querySelectorAll('#adminSidebar .nav-item').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     const view = btn.dataset.view;
                     document.querySelectorAll('#adminMain .view').forEach(v => v.classList.remove('active'));
                     const target = document.getElementById(view);
                     if (target) target.classList.add('active');
-                    // Refresh data
                     if (view === 'adminOverview') loadAdminOverview();
                     if (view === 'adminStudents') loadAdminStudents();
                     if (view === 'adminRecords') loadAdminRecords();
@@ -1949,29 +1685,23 @@
                 });
             });
 
-            // Load all data
             loadAdminOverview();
             loadAdminStudents();
             loadAdminRecords();
             loadEmailRecipients();
             loadEmailLogs();
 
-            // Event search
             document.getElementById('adminStudentSearch').addEventListener('input', () => renderAdminStudents());
             document.getElementById('adminRecordSearch').addEventListener('input', () => renderAdminRecords());
 
-            // Email: select all
             document.getElementById('emailSelectAll').addEventListener('change', (e) => {
                 const checked = e.target.checked;
-                document.querySelectorAll('#emailRecipientList input[type="checkbox"]').forEach(cb => cb.checked =
-                    checked);
+                document.querySelectorAll('#emailRecipientList input[type="checkbox"]').forEach(cb => cb.checked = checked);
                 updateEmailRecipientFields();
             });
 
-            // Email: send
             document.getElementById('emailSendBtn').addEventListener('click', sendEmail);
 
-            // Email: attachment preview
             document.getElementById('emailAttachment').addEventListener('change', (e) => {
                 const file = e.target.files[0];
                 const preview = document.getElementById('emailAttachmentPreview');
@@ -1984,10 +1714,8 @@
             });
         }
 
-        // ---- OVERVIEW ----
         async function loadAdminOverview() {
             try {
-                // Students count
                 const snapUsers = await db.ref('users').once('value');
                 const users = snapUsers.val() || {};
                 let studentCount = 0;
@@ -2002,7 +1730,6 @@
                     }
                 });
 
-                // Records count
                 const snapRecords = await db.ref('bacaan').once('value');
                 const records = snapRecords.val() || {};
                 const recordCount = Object.keys(records).length;
@@ -2011,8 +1738,7 @@
                 document.getElementById('statRecords').textContent = recordCount;
                 document.getElementById('statMata').textContent = totalMata;
 
-                // Rankings
-                // Top 10 mata
+                // Top 10 Mata
                 const sortedMata = [...studentList].sort((a, b) => (b.totalMata || 0) - (a.totalMata || 0)).slice(0, 10);
                 const rankMataEl = document.getElementById('rankMata');
                 if (sortedMata.length === 0) {
@@ -2023,9 +1749,8 @@
                     ).join('');
                 }
 
-                // Top 10 bacaan
-                const sortedBacaan = [...studentList].sort((a, b) => (b.totalBacaan || 0) - (a.totalBacaan || 0)).slice(0,
-                10);
+                // Top 10 Bacaan
+                const sortedBacaan = [...studentList].sort((a, b) => (b.totalBacaan || 0) - (a.totalBacaan || 0)).slice(0, 10);
                 const rankBacaanEl = document.getElementById('rankBacaan');
                 if (sortedBacaan.length === 0) {
                     rankBacaanEl.innerHTML = '<div class="text-muted">Tiada data.</div>';
@@ -2035,15 +1760,14 @@
                     ).join('');
                 }
 
-                // Top 10 kelas
+                // Top 10 Kelas
                 const kelasMap = {};
                 studentList.forEach(s => {
                     const k = s.kelas || 'Tiada Kelas';
                     if (!kelasMap[k]) kelasMap[k] = 0;
                     kelasMap[k] += (s.totalBacaan || 0);
                 });
-                const sortedKelas = Object.keys(kelasMap).sort((a, b) => (kelasMap[b] || 0) - (kelasMap[a] || 0)).slice(0,
-                10);
+                const sortedKelas = Object.keys(kelasMap).sort((a, b) => (kelasMap[b] || 0) - (kelasMap[a] || 0)).slice(0, 10);
                 const rankKelasEl = document.getElementById('rankKelas');
                 if (sortedKelas.length === 0) {
                     rankKelasEl.innerHTML = '<div class="text-muted">Tiada data.</div>';
@@ -2052,13 +1776,11 @@
                         `<div class="rank-item"><span class="pos">#${i+1}</span><span class="name">${escapeHtml(k)}</span><span class="value">${kelasMap[k]} bacaan</span></div>`
                     ).join('');
                 }
-
             } catch (err) {
                 showToast('Gagal muat overview: ' + err.message, 'error');
             }
         }
 
-        // ---- STUDENTS ----
         async function loadAdminStudents() {
             try {
                 const snap = await db.ref('users').once('value');
@@ -2092,24 +1814,23 @@
                 return;
             }
             tbody.innerHTML = filtered.map(s => `
-                    <tr>
-                        <td><strong>${escapeHtml(s.nama||'-')}</strong></td>
-                        <td>${escapeHtml(s.ic||'-')}</td>
-                        <td><span class="badge">${escapeHtml(s.kelas||'-')}</span></td>
-                        <td>${escapeHtml(s.email||'-')}</td>
-                        <td>${s.totalBacaan||0}</td>
-                        <td><strong>${s.totalMata||0}</strong></td>
-                        <td>
-                            <button class="btn-sm danger" onclick="adminDeleteStudent('${s.uid}')">🗑️ Padam Akaun</button>
-                        </td>
-                    </tr>
-                `).join('');
+                <tr>
+                    <td><strong>${escapeHtml(s.nama||'-')}</strong></td>
+                    <td>${escapeHtml(s.ic||'-')}</td>
+                    <td><span class="badge">${escapeHtml(s.kelas||'-')}</span></td>
+                    <td>${escapeHtml(s.email||'-')}</td>
+                    <td>${s.totalBacaan||0}</td>
+                    <td><strong>${s.totalMata||0}</strong></td>
+                    <td>
+                        <button class="btn-sm danger" onclick="adminDeleteStudent('${s.uid}')">🗑️ Padam Akaun</button>
+                    </td>
+                </tr>
+            `).join('');
         }
 
         window.adminDeleteStudent = async function(uid) {
             if (!confirm('Padam akaun pelajar ini? Semua rekod bacaan juga akan dipadam.')) return;
             try {
-                // Delete all records of this student
                 const snap = await db.ref('bacaan').orderByChild('uid').equalTo(uid).once('value');
                 const records = snap.val() || {};
                 const promises = [];
@@ -2117,7 +1838,6 @@
                     promises.push(db.ref('bacaan/' + key).remove());
                 });
                 await Promise.all(promises);
-                // Delete user
                 await db.ref('users/' + uid).remove();
                 showToast('✅ Akaun pelajar dipadam.', 'success');
                 loadAdminStudents();
@@ -2128,7 +1848,6 @@
             }
         };
 
-        // ---- ALL RECORDS ----
         async function loadAdminRecords() {
             try {
                 const snap = await db.ref('bacaan').once('value');
@@ -2159,19 +1878,19 @@
                 return;
             }
             tbody.innerHTML = filtered.map(r => `
-                    <tr>
-                        <td><strong>${escapeHtml(r.nama||'-')}</strong></td>
-                        <td>${escapeHtml(r.tajuk||'-')}</td>
-                        <td><span class="badge">${escapeHtml(r.kategori||'-')}</span></td>
-                        <td>${escapeHtml(r.bahasa||'-')}</td>
-                        <td>${r.mukaSurat||0}</td>
-                        <td><strong>${r.mata||0}</strong></td>
-                        <td>${formatDate(r.tarikh)}</td>
-                        <td>
-                            <button class="btn-sm danger" onclick="adminDeleteRecord('${r.id}')">🗑️</button>
-                        </td>
-                    </tr>
-                `).join('');
+                <tr>
+                    <td><strong>${escapeHtml(r.nama||'-')}</strong></td>
+                    <td>${escapeHtml(r.tajuk||'-')}</td>
+                    <td><span class="badge">${escapeHtml(r.kategori||'-')}</span></td>
+                    <td>${escapeHtml(r.bahasa||'-')}</td>
+                    <td>${r.mukaSurat||0}</td>
+                    <td><strong>${r.mata||0}</strong></td>
+                    <td>${formatDate(r.tarikh)}</td>
+                    <td>
+                        <button class="btn-sm danger" onclick="adminDeleteRecord('${r.id}')">🗑️</button>
+                    </td>
+                </tr>
+            `).join('');
         }
 
         window.adminDeleteRecord = async function(recordId) {
@@ -2180,7 +1899,6 @@
                 const snap = await db.ref('bacaan/' + recordId).once('value');
                 const record = snap.val();
                 if (record) {
-                    // Kurangkan total bacaan & mata pelajar
                     const uid = record.uid;
                     const userSnap = await db.ref('users/' + uid).once('value');
                     const user = userSnap.val();
@@ -2202,27 +1920,23 @@
             }
         };
 
-        // ---- EMAIL RECIPIENTS ----
         function loadEmailRecipients() {
             const list = document.getElementById('emailRecipientList');
-            // Gunakan cache adminStudentsCache
             if (adminStudentsCache.length === 0) {
                 list.innerHTML = '<span class="text-muted">Tiada pelajar.</span>';
                 return;
             }
             list.innerHTML = adminStudentsCache.map(s => `
-                    <label style="display:flex;align-items:center;gap:4px;background:#f8fafc;padding:4px 12px;border-radius:20px;border:1px solid #eef2f7;cursor:pointer;">
-                        <input type="checkbox" class="recipient-check" value="${s.uid}" data-name="${escapeHtml(s.nama)}" data-email="${escapeHtml(s.email)}" />
-                        ${escapeHtml(s.nama)} (${escapeHtml(s.email)})
-                    </label>
-                `).join('');
+                <label style="display:flex;align-items:center;gap:4px;background:#f8fafc;padding:4px 12px;border-radius:20px;border:1px solid #eef2f7;cursor:pointer;">
+                    <input type="checkbox" class="recipient-check" value="${s.uid}" data-name="${escapeHtml(s.nama)}" data-email="${escapeHtml(s.email)}" />
+                    ${escapeHtml(s.nama)} (${escapeHtml(s.email)})
+                </label>
+            `).join('');
 
-            // Event untuk update fields
             document.querySelectorAll('#emailRecipientList .recipient-check').forEach(cb => {
                 cb.addEventListener('change', updateEmailRecipientFields);
             });
 
-            // Update select all state
             document.getElementById('emailSelectAll').checked = false;
         }
 
@@ -2245,7 +1959,6 @@
             }
         }
 
-        // ---- SEND EMAIL ----
         async function sendEmail() {
             const recipientName = document.getElementById('emailRecipientName').value.trim();
             const recipientEmail = document.getElementById('emailRecipientEmail').value.trim();
@@ -2260,7 +1973,6 @@
                 return;
             }
 
-            // Sediakan data untuk EmailJS
             const templateParams = {
                 to_name: recipientName,
                 to_email: recipientEmail,
@@ -2268,13 +1980,9 @@
                 message: message,
             };
 
-            // Jika ada lampiran, encode ke base64 (EmailJS limit ~25MB)
-            // Untuk simplicity, kita hantar tanpa lampiran melalui EmailJS
-            // Tapi kita simpan dalam log bahawa ada lampiran
             let attachmentInfo = '';
             if (attachment) {
                 attachmentInfo = ` (Lampiran: ${attachment.name})`;
-                // Baca file sebagai base64
                 try {
                     const base64 = await readFileAsBase64(attachment);
                     templateParams.attachment = base64;
@@ -2286,14 +1994,12 @@
                 }
             }
 
-            // Hantar via EmailJS
             try {
-                const response = await emailjs.send(
+                await emailjs.send(
                     EMAILJS_SERVICE_ID,
                     EMAILJS_TEMPLATE_ID,
                     templateParams
                 );
-                // Simpan log
                 await db.ref('emailLogs').push({
                     recipientName: recipientName,
                     recipientEmail: recipientEmail,
@@ -2301,12 +2007,10 @@
                     sentAt: Date.now()
                 });
                 showSuccess(sucEl, '✅ Email berjaya dihantar!');
-                // Reset
                 document.getElementById('emailSubject').value = '';
                 document.getElementById('emailMessage').value = '';
                 document.getElementById('emailAttachment').value = '';
                 document.getElementById('emailAttachmentPreview').style.display = 'none';
-                // Refresh logs
                 loadEmailLogs();
             } catch (err) {
                 showError(errEl, 'Gagal hantar email: ' + err.text || err.message);
@@ -2322,7 +2026,6 @@
             });
         }
 
-        // ---- EMAIL LOGS ----
         async function loadEmailLogs() {
             try {
                 const snap = await db.ref('emailLogs').orderByChild('sentAt').once('value');
@@ -2335,100 +2038,29 @@
                     return;
                 }
                 tbody.innerHTML = logs.map(log => `
-                        <tr>
-                            <td><strong>${escapeHtml(log.recipientName||'-')}</strong></td>
-                            <td>${escapeHtml(log.recipientEmail||'-')}</td>
-                            <td>${escapeHtml(log.subject||'-')}</td>
-                            <td>${formatDate(log.sentAt)}</td>
-                        </tr>
-                    `).join('');
+                    <tr>
+                        <td><strong>${escapeHtml(log.recipientName||'-')}</strong></td>
+                        <td>${escapeHtml(log.recipientEmail||'-')}</td>
+                        <td>${escapeHtml(log.subject||'-')}</td>
+                        <td>${formatDate(log.sentAt)}</td>
+                    </tr>
+                `).join('');
             } catch (err) {
                 showToast('Gagal muat log: ' + err.message, 'error');
             }
         }
 
         // ============================================================
-        // 13. INIT: Set tarikh default untuk add reading
+        // 13. INIT
         // ============================================================
         document.addEventListener('DOMContentLoaded', () => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('readTarikh').value = today;
         });
 
-        // ============================================================
-        // 14. FIREBASE SECURITY RULES (dalam format JSON)
-        // ============================================================
-        /*
-        Simpan ini sebagai firebase-security-rules.json:
-        {
-          "rules": {
-            "users": {
-              "$uid": {
-                ".read": "auth.uid === $uid || auth.token.role === 'admin'",
-                ".write": "auth.uid === $uid || auth.token.role === 'admin'"
-              }
-            },
-            "bacaan": {
-              ".read": "auth.token.role === 'admin'",
-              ".write": "auth.token.role === 'admin'",
-              "$recordId": {
-                ".read": "data.child('uid').val() === auth.uid || auth.token.role === 'admin'",
-                ".write": "data.child('uid').val() === auth.uid || auth.token.role === 'admin'"
-              }
-            },
-            "emailLogs": {
-              ".read": "auth.token.role === 'admin'",
-              ".write": "auth.token.role === 'admin'"
-            }
-          }
-        }
-        */
-
-        // ============================================================
-        // 15. PANDUAN DEPLOY
-        // ============================================================
-        /*
-        CARA SAMBUNG FIREBASE:
-        - Konfigurasi Firebase telah disediakan. Pastikan anda telah mengaktifkan Authentication (Email/Password) dan Realtime Database di Firebase Console.
-
-        CARA SAMBUNG EMAILJS:
-        1. Buka https://www.emailjs.com/
-        2. Daftar dan buat account.
-        3. Buat Email Service dan dapatkan Service ID.
-        4. Buat Email Template dengan parameter: 
-           {{to_name}}, {{to_email}}, {{subject}}, {{message}}, {{attachment}}
-        5. Dapatkan Public Key dari Account > API Keys.
-        6. Gantikan EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID di bahagian "3. EMAILJS KONFIGURASI".
-
-        CARA DEPLOY KE GITHUB:
-        1. Buat repository baru di GitHub.
-        2. Inisialisasi git: git init
-        3. git add .
-        4. git commit -m "Initial commit"
-        5. git remote add origin https://github.com/username/repo.git
-        6. git push -u origin main
-
-        CARA DEPLOY KE FIREBASE HOSTING:
-        1. npm install -g firebase-tools
-        2. firebase login
-        3. firebase init hosting
-        4. Pilih project dan set public directory ke "." (root)
-        5. firebase deploy --only hosting
-
-        STRUKTUR FOLDER:
-        / (root)
-        ├── index.html          (fail utama, mengandungi semua HTML, CSS & JS)
-        ├── firebase-security-rules.json
-        └── README.md           (dokumentasi)
-
-        NOTA: Semua kod dalam satu fail HTML untuk kemudahan deployment.
-        Untuk production, disarankan pecahkan ke fail berasingan (css/, js/).
-        */
-
         console.log('📚 NILAM Digital sedia!');
         console.log('⚠️  Gantikan EmailJS config sebelum deploy.');
         console.log('🔑 Admin login: kvwt / kvwt intel');
     </script>
-
 </body>
 </html>
