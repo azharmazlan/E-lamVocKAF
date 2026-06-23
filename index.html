@@ -868,12 +868,12 @@
                 <!-- Login Form -->
                 <div id="loginForm">
                     <h1>📚 NILAM <span>Digital</span></h1>
-                    <p class="sub">Log masuk ke akaun anda</p>
+                    <p class="sub">Log masuk menggunakan No. IC dan kata laluan</p>
                     <div id="loginError" class="error-msg"></div>
                     <div id="loginSuccess" class="success-msg"></div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="loginEmail" placeholder="email@contoh.com" />
+                        <label>No. IC</label>
+                        <input type="text" id="loginIc" placeholder="000101-10-1234" />
                     </div>
                     <div class="form-group">
                         <label>Kata Laluan</label>
@@ -882,7 +882,7 @@
                     <button class="btn" id="loginBtn">Log Masuk</button>
                     <button class="btn btn-outline" id="adminLoginBtn" style="margin-top:10px;">🔑 Log Masuk sebagai Admin</button>
                     <div class="admin-hint">
-                        <strong>Admin:</strong> gunakan "kvwt" & "kvwt intel" (atau tekan butang di atas)
+                        <strong>Admin:</strong> gunakan butang di atas (sistem akan cipta/reset akaun secara automatik)
                     </div>
                     <div class="switch-link">
                         Tidak ada akaun? <a id="goToRegister">Daftar di sini</a>
@@ -1310,6 +1310,7 @@
             document.getElementById('registerError').style.display = 'none';
         });
 
+        // ===== REGISTRATION =====
         document.getElementById('registerBtn').addEventListener('click', async () => {
             const nama = document.getElementById('regNama').value.trim();
             const ic = document.getElementById('regIc').value.trim();
@@ -1329,8 +1330,18 @@
             }
 
             try {
+                // Semak sama ada IC sudah didaftar
+                const icSnap = await db.ref('icMapping/' + ic).once('value');
+                if (icSnap.exists()) {
+                    showError(errEl, 'No. IC ini sudah didaftarkan. Sila gunakan IC lain.');
+                    return;
+                }
+
+                // Cipta akaun Firebase
                 const cred = await auth.createUserWithEmailAndPassword(email, password);
                 const uid = cred.user.uid;
+
+                // Simpan data pengguna di users/{uid}
                 await db.ref('users/' + uid).set({
                     nama: nama,
                     ic: ic,
@@ -1341,7 +1352,12 @@
                     totalBacaan: 0,
                     createdAt: Date.now()
                 });
+
+                // Simpan pemetaan IC -> email untuk log masuk
+                await db.ref('icMapping/' + ic).set(email);
+
                 showSuccess(sucEl, '✅ Pendaftaran berjaya! Sila log masuk.');
+                // Reset dan alih ke login
                 document.getElementById('regNama').value = '';
                 document.getElementById('regIc').value = '';
                 document.getElementById('regKelas').value = '';
@@ -1349,7 +1365,7 @@
                 document.getElementById('regPassword').value = '';
                 document.getElementById('loginForm').style.display = 'block';
                 document.getElementById('registerForm').style.display = 'none';
-                document.getElementById('loginEmail').value = email;
+                document.getElementById('loginIc').value = ic;
                 document.getElementById('loginPassword').value = '';
                 await auth.signOut();
             } catch (err) {
@@ -1357,31 +1373,34 @@
             }
         });
 
-        // Login button handler – with alias support for admin
+        // ===== LOGIN (menggunakan IC) =====
         document.getElementById('loginBtn').addEventListener('click', async () => {
-            let email = document.getElementById('loginEmail').value.trim();
+            const ic = document.getElementById('loginIc').value.trim();
             const password = document.getElementById('loginPassword').value;
             const errEl = document.getElementById('loginError');
 
-            if (!email || !password) {
-                showError(errEl, 'Sila masukkan email dan kata laluan.');
+            if (!ic || !password) {
+                showError(errEl, 'Sila masukkan No. IC dan kata laluan.');
                 return;
             }
 
-            // Jika pengguna menaip "kvwt", tukar ke email admin sebenar
-            if (email.toLowerCase() === 'kvwt') {
-                email = 'perpustakaankvwt2.0@gmail.com';
-            }
-
             try {
+                // Cari email berdasarkan IC
+                const icSnap = await db.ref('icMapping/' + ic).once('value');
+                if (!icSnap.exists()) {
+                    showError(errEl, 'No. IC tidak ditemui. Sila daftar atau semak semula.');
+                    return;
+                }
+                const email = icSnap.val();
+
+                // Log masuk dengan email dan password
                 await auth.signInWithEmailAndPassword(email, password);
             } catch (err) {
                 showError(errEl, err.message);
             }
         });
 
-        // Admin button – langsung log masuk tanpa mengisi borang
-        // Sekarang ia akan mencipta akaun jika belum wujud
+        // ===== ADMIN LOGIN (butang khas) =====
         document.getElementById('adminLoginBtn').addEventListener('click', async () => {
             const errEl = document.getElementById('loginError');
             const adminEmail = 'perpustakaankvwt2.0@gmail.com';
@@ -1391,15 +1410,16 @@
                 // Cuba log masuk dahulu
                 await auth.signInWithEmailAndPassword(adminEmail, adminPassword);
                 // Jika berjaya, auth state listener akan bawa ke dashboard admin
+                return;
             } catch (error) {
+                // Jika akaun tidak wujud, cipta
                 if (error.code === 'auth/user-not-found') {
-                    // Akaun belum wujud – cipta sekarang
                     try {
                         const cred = await auth.createUserWithEmailAndPassword(adminEmail, adminPassword);
                         const uid = cred.user.uid;
                         await db.ref('users/' + uid).set({
                             nama: 'Admin Sistem',
-                            ic: '000000-00-0000',
+                            ic: 'admin',
                             kelas: 'Admin',
                             email: adminEmail,
                             role: 'admin',
@@ -1407,19 +1427,37 @@
                             totalBacaan: 0,
                             createdAt: Date.now()
                         });
+                        await db.ref('icMapping/admin').set(adminEmail);
                         showToast('✅ Akaun admin telah dicipta. Log masuk automatik...', 'success');
-                        // Log masuk semula selepas cipta
+                        // Log masuk semula
                         await auth.signInWithEmailAndPassword(adminEmail, adminPassword);
+                        return;
                     } catch (createError) {
                         showError(errEl, 'Gagal mencipta akaun admin: ' + createError.message);
+                        return;
                     }
-                } else if (error.code === 'auth/wrong-password') {
-                    showError(errEl, 'Kata laluan admin salah. Sila semak.');
-                } else if (error.code === 'auth/invalid-email') {
-                    showError(errEl, 'Email admin tidak sah. Sila semak konfigurasi.');
-                } else {
-                    showError(errEl, 'Gagal log masuk sebagai admin: ' + error.message);
                 }
+
+                // Jika password salah, hantar reset password
+                if (error.code === 'auth/wrong-password') {
+                    try {
+                        await auth.sendPasswordResetEmail(adminEmail);
+                        showToast('📧 Email reset kata laluan telah dihantar ke ' + adminEmail + '. Sila semak dan tetapkan semula.', 'info');
+                        showError(errEl, 'Kata laluan admin salah. Sila semak email untuk reset.');
+                    } catch (resetError) {
+                        showError(errEl, 'Gagal menghantar reset password: ' + resetError.message);
+                    }
+                    return;
+                }
+
+                // Jika email tidak sah (jarang berlaku)
+                if (error.code === 'auth/invalid-email') {
+                    showError(errEl, 'Email admin tidak sah. Sila semak konfigurasi.');
+                    return;
+                }
+
+                // Ralat lain
+                showError(errEl, 'Gagal log masuk sebagai admin: ' + error.message);
             }
         });
 
@@ -1432,13 +1470,8 @@
         });
 
         // ============================================================
-        // 9. AUTH STATE LISTENER (tanpa auto-create admin berlebihan)
+        // 9. AUTH STATE LISTENER
         // ============================================================
-        // Kita sudah ada logik cipta admin dalam butang admin, jadi kita tidak perlu
-        // lagi fungsi ensureAdminAccount() yang berasingan. Tetapi kita boleh
-        // biarkan ia sebagai fallback jika mahu. Untuk elakkan konflik, kita
-        // kosongkan sahaja atau kita biarkan tetapi kurang penting.
-
         auth.onAuthStateChanged(async (user) => {
             if (user) {
                 try {
@@ -1457,7 +1490,13 @@
                         initStudentDashboard();
                     }
                 } catch (err) {
-                    showToast('Gagal memuatkan data: ' + err.message, 'error');
+                    if (err.code === 'PERMISSION_DENIED' || err.message.includes('permission_denied')) {
+                        showToast('❌ Ralat kebenaran (permission_denied). Sila tetapkan peraturan Firebase Realtime Database di Console. Untuk pembangunan, gunakan peraturan: { "rules": { ".read": true, ".write": true } }', 'error');
+                        await auth.signOut();
+                    } else {
+                        showToast('Gagal memuatkan data: ' + err.message, 'error');
+                        await auth.signOut();
+                    }
                 }
             } else {
                 currentUser = null;
@@ -1466,8 +1505,6 @@
                 document.getElementById('registerForm').style.display = 'none';
                 document.getElementById('loginError').style.display = 'none';
                 document.getElementById('registerError').style.display = 'none';
-                // Tiada lagi ensureAdminAccount() di sini untuk mengelakkan pertindihan.
-                // Butang admin akan uruskan penciptaan.
             }
         });
 
@@ -1658,6 +1695,22 @@
             }
 
             try {
+                // Jika IC berubah, kemas kini pemetaan icMapping
+                const oldIc = currentUser.ic;
+                if (ic !== oldIc) {
+                    // Semak sama ada IC baru sudah digunakan
+                    const icSnap = await db.ref('icMapping/' + ic).once('value');
+                    if (icSnap.exists()) {
+                        showError(errEl, 'No. IC ini sudah digunakan oleh pengguna lain.');
+                        return;
+                    }
+                    // Padam pemetaan lama
+                    await db.ref('icMapping/' + oldIc).remove();
+                    // Simpan pemetaan baru
+                    await db.ref('icMapping/' + ic).set(email);
+                }
+
+                // Update di Realtime DB
                 await db.ref('users/' + currentUser.uid).update({
                     nama: nama,
                     ic: ic,
@@ -1848,6 +1901,13 @@
         window.adminDeleteStudent = async function(uid) {
             if (!confirm('Padam akaun pelajar ini? Semua rekod bacaan juga akan dipadam.')) return;
             try {
+                // Dapatkan IC pelajar untuk padam pemetaan
+                const userSnap = await db.ref('users/' + uid).once('value');
+                const userData = userSnap.val();
+                if (userData && userData.ic) {
+                    await db.ref('icMapping/' + userData.ic).remove();
+                }
+
                 const snap = await db.ref('bacaan').orderByChild('uid').equalTo(uid).once('value');
                 const records = snap.val() || {};
                 const promises = [];
@@ -2076,8 +2136,8 @@
         });
 
         console.log('📚 NILAM Digital sedia!');
-        console.log('⚠️  Gantikan EmailJS config sebelum deploy.');
-        console.log('🔑 Admin login: kvwt / kvwt intel');
+        console.log('🔑 Log masuk menggunakan No. IC dan kata laluan');
+        console.log('🔑 Admin: butang khas (auto cipta/reset)');
     </script>
 </body>
 </html>
