@@ -882,7 +882,7 @@
                     <button class="btn" id="loginBtn">Log Masuk</button>
                     <button class="btn btn-outline" id="adminLoginBtn" style="margin-top:10px;">🔑 Log Masuk sebagai Admin</button>
                     <div class="admin-hint">
-                        <strong>Admin:</strong> gunakan "kvwt" & "kvwt intel"
+                        <strong>Admin:</strong> gunakan "kvwt" & "kvwt intel" (atau tekan butang di atas)
                     </div>
                     <div class="switch-link">
                         Tidak ada akaun? <a id="goToRegister">Daftar di sini</a>
@@ -1357,14 +1357,21 @@
             }
         });
 
+        // Login button handler – with alias support for admin
         document.getElementById('loginBtn').addEventListener('click', async () => {
-            const email = document.getElementById('loginEmail').value.trim();
+            let email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value;
             const errEl = document.getElementById('loginError');
 
             if (!email || !password) {
                 showError(errEl, 'Sila masukkan email dan kata laluan.');
                 return;
+            }
+
+            // Jika pengguna menaip "kvwt", tukar ke email admin sebenar
+            if (email.toLowerCase() === 'kvwt') {
+                email = 'perpustakaankvwt2.0@gmail.com';
+                // (pilihan: kita boleh set semula field untuk menunjukkan email sebenar, tetapi tidak perlu)
             }
 
             try {
@@ -1374,12 +1381,18 @@
             }
         });
 
-        document.getElementById('adminLoginBtn').addEventListener('click', () => {
-            document.getElementById('loginEmail').value = 'kvwt';
-            document.getElementById('loginPassword').value = 'kvwt intel';
-            document.getElementById('loginBtn').click();
+        // Admin button – langsung log masuk tanpa mengisi borang
+        document.getElementById('adminLoginBtn').addEventListener('click', async () => {
+            const errEl = document.getElementById('loginError');
+            try {
+                await auth.signInWithEmailAndPassword('perpustakaankvwt2.0@gmail.com', 'kvwt intel');
+                // Jika berjaya, auth state listener akan bawa ke dashboard admin
+            } catch (err) {
+                showError(errEl, 'Gagal log masuk sebagai admin: ' + err.message);
+            }
         });
 
+        // Enter key support
         document.getElementById('loginPassword').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') document.getElementById('loginBtn').click();
         });
